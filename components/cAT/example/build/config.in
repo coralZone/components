@@ -1,0 +1,17 @@
+source "/home/kirto/xfusion/XFKconfig"
+source "/home/kirto/xfusion/boards/XFKconfig"
+menu "system components"
+    source "/home/kirto/xfusion/components/xf_hal/XFKconfig"
+    source "/home/kirto/xfusion/components/xf_log/XFKconfig"
+    source "/home/kirto/xfusion/components/xf_event/XFKconfig"
+    source "/home/kirto/xfusion/components/xf_init/XFKconfig"
+    source "/home/kirto/xfusion/components/xf_ringbuf/XFKconfig"
+    source "/home/kirto/xfusion/components/xf_heap/XFKconfig"
+    source "/home/kirto/xfusion/components/xf_libc/XFKconfig"
+    source "/home/kirto/xfusion/components/xf_atomic/XFKconfig"
+    source "/home/kirto/xfusion/components/xf_def/XFKconfig"
+    source "/home/kirto/xfusion/components/xf_osal/XFKconfig"
+    source "/home/kirto/xfusion/components/xf_mutex/XFKconfig"
+endmenu
+menu "user components"
+endmenu

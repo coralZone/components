@@ -1,0 +1,4 @@
+{
+    "XF_PORT": "esp32",
+    "XF_PORT_PATH": "/home/kirto/xfusion/boards/espressif/esp32"
+}

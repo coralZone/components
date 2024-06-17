@@ -1,0 +1,18 @@
+{
+    "name": "tiny-regex-c",
+    "author": "liukangcc",
+    "version": "1.0.0",
+    "license": "unlicense",
+    "keywords":
+    [
+        "regex"
+    ],
+    "description": "Small and portable Regular Expression (regex) library written in C.",
+    "url": "https://github.com/coralZone/components",
+    "dependencies":
+    {},
+    "links":
+    {
+        "Homepage": "https://github.com/coralZone/components"
+    }
+}

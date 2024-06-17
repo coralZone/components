@@ -1,0 +1,18 @@
+{
+    "name": "MultiButton",
+    "author": "0x1abin",
+    "version": "1.0.0",
+    "license": "MIT",
+    "keywords":
+    [
+        "Button State Machine"
+    ],
+    "description": "MultiButton is a compact and easy-to-use event-driven button driver module.",
+    "url": "https://github.com/coralZone/components",
+    "dependencies":
+    {},
+    "links":
+    {
+        "Homepage": "https://github.com/coralZone/components"
+    }
+}

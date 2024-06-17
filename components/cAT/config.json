@@ -1,0 +1,19 @@
+{
+    "name": "cAT",
+    "author": "marcinbor85",
+    "version": "0.11.1",
+    "license": "MIT",
+    "keywords":
+    [
+        "AT",
+        "command"
+    ],
+    "description": "Plain C library for parsing AT commands for use in host devices",
+    "url": "https://github.com/coralZone/components",
+    "dependencies":
+    {},
+    "links":
+    {
+        "Homepage": "https://github.com/coralZone/components"
+    }
+}

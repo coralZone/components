@@ -1,0 +1,18 @@
+{
+    "name": "TinyFrame",
+    "author": "MightyPork",
+    "version": "2.3.0",
+    "license": "MIT",
+    "keywords":
+    [
+        "data format"
+    ],
+    "description": "TinyFrame is a simple library for building and parsing data frames to be sent over a serial interface (e.g. UART, telnet, socket).",
+    "url": "https://github.com/coralZone/components",
+    "dependencies":
+    {},
+    "links":
+    {
+        "Homepage": "https://github.com/coralZone/components"
+    }
+}

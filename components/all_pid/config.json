@@ -1,0 +1,19 @@
+{
+    "name": "all_pid",
+    "author": "Dyyt587",
+    "version": "1.0.0",
+    "license": "MIT",
+    "keywords":
+    [
+        "PID",
+        "algorithm"
+    ],
+    "description": "This is a powerful pid",
+    "url": "https://github.com/coralZone/components",
+    "dependencies":
+    {},
+    "links":
+    {
+        "Homepage": "https://github.com/coralZone/components/all_pid"
+    }
+}
