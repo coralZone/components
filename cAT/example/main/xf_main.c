@@ -16,6 +16,11 @@
 
 /* ==================== [Defines] =========================================== */
 
+#define UART_NUM        1
+#define UART_BAUDRATE   115200
+#define UART_TX_NUM     4
+#define UART_RX_NUM     5
+
 /* ==================== [Typedefs] ========================================== */
 
 /* ==================== [Static Prototypes] ================================= */
@@ -93,10 +98,11 @@ static struct cat_descriptor desc = {
 
 void xf_main(void)
 {
-    xf_timer_src_init(0, 1000);
-    xf_uart_init(1, 115200, XF_UART_PRESET_DEFAULT, 128, 128, 4, 5, NC, NC);
+    xf_hal_uart_init(UART_NUM, UART_BAUDRATE);
+    xf_hal_uart_set_gpio(UART_NUM, UART_TX_NUM, UART_RX_NUM);
+    xf_hal_uart_enable(UART_NUM);
     xf_cat_init(1, &desc);
-    xf_cat_service(0);
+    xf_cat_service();
 }
 
 /* ==================== [Static Functions] ================================== */

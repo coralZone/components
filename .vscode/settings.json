@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "XFKconfig": "kconfig",
+        "xf_cat.h": "c"
+    }
+}

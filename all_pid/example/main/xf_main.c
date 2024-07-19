@@ -16,6 +16,8 @@
 
 /* ==================== [Defines] =========================================== */
 
+#define TAG "all_pid"
+
 /* ==================== [Typedefs] ========================================== */
 
 /* ==================== [Static Prototypes] ================================= */
@@ -28,7 +30,7 @@
 
 void xf_main(void)
 {
-    xf_printf("Hello all pid\r\n");
+    XF_LOGI(TAG, "Hello all pid");
     apid_t pid;
     APID_Init(&pid, PID_POSITION, 3, 0.1, 0);
     APID_Enable(&pid); // 默认已经开启
@@ -40,7 +42,7 @@ void xf_main(void)
         APID_Set_Present(&pid, 32);//用户定时更新当前值数据
 
         APID_Hander(&pid, 1);//cycle 如果不使用，建议设置为1,使用请输入两次调用的间隔单位ms
-        xf_printf("pid out %f\r\n", APID_Get_Out(&pid));
+        XF_LOGI(TAG, "pid out %f", APID_Get_Out(&pid));
     }
 
     APID_Fuzzy_Fast_Init(&pid, &(APID_Fuzzy_Init_t){
@@ -66,7 +68,7 @@ void xf_main(void)
         APID_Set_Present(&pid, 32);//用户定时更新当前值数据
 
         APID_Hander(&pid, 1);//cycle 如果不使用，建议设置为1,使用请输入两次调用的间隔单位ms
-        xf_printf("pid out1 %f\r\n", APID_Get_Out(&pid));
+        XF_LOGI(TAG, "pid out1 %f", APID_Get_Out(&pid));
     }
 
 
@@ -78,7 +80,7 @@ void xf_main(void)
         APID_Set_Present(&pid, 32);//用户定时更新当前值数据
 
         APID_Hander(&pid, 1);//cycle 如果不使用，建议设置为1,使用请输入两次调用的间隔单位ms
-        xf_printf("pid out1 %f\r\n", APID_Get_Out(&pid));
+        XF_LOGI(TAG, "pid out1 %f", APID_Get_Out(&pid));
     }
 }
 

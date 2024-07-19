@@ -12,6 +12,7 @@
 /* ==================== [Includes] ========================================== */
 
 #include "xf_cat.h"
+#include "xf_task.h"
 
 /* ==================== [Defines] =========================================== */
 
@@ -21,7 +22,7 @@
 
 static int read_char(char *ch);
 static int write_char(char ch);
-static void timeout_cb(xf_timer_t *timer);
+static void timeout_cb(xf_task_t task);
 
 /* ==================== [Static Variables] ================================== */
 
@@ -50,10 +51,9 @@ xf_err_t xf_cat_init(xf_uart_num_t num, struct cat_descriptor *desc)
     return XF_OK;
 }
 
-xf_err_t xf_cat_service(xf_timer_num_t tim_index)
+xf_err_t xf_cat_service(void)
 {
-    xf_timer_t *tim = xf_timer_create_by_ms(tim_index, 10, timeout_cb, NULL);
-    CAT_ERR_CHECK(xf_timer_start(tim, XF_TIM_ALWAYS));
+    xf_ntask_create_loop(timeout_cb, NULL, 5, 10);
     return XF_OK;
 }
 
@@ -61,17 +61,17 @@ xf_err_t xf_cat_service(xf_timer_num_t tim_index)
 
 static int read_char(char *ch)
 {
-    xf_uart_read(uart_num, ch, 1, 0);
+    xf_hal_uart_read(uart_num, (uint8_t*)ch, 1);
     return 1;
 }
 
 static int write_char(char ch)
 {
-    xf_uart_write(uart_num, &ch, 1, 0);
+    xf_hal_uart_write(uart_num, (uint8_t*)&ch, 1);
     return 1;
 }
 
-static void timeout_cb(xf_timer_t *timer)
+static void timeout_cb(xf_task_t task)
 {
     cat_service(&at);
 }
