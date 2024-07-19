@@ -10,6 +10,7 @@
  */
 
 /* ==================== [Includes] ========================================== */
+
 #include "xf_TinyFrame.h"
 
 /* ==================== [Defines] =========================================== */
@@ -28,7 +29,7 @@ static xf_uart_num_t uart_num ;
 
 void TF_WriteImpl(TinyFrame *tf, const uint8_t *buff, uint32_t len)
 {
-    xf_uart_write(uart_num, buff, len, 0);
+    xf_hal_uart_write(uart_num, buff, len);
 }
 
 void xf_TF_uart_port(xf_uart_num_t uart)

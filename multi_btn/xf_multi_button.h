@@ -15,7 +15,6 @@
 /* ==================== [Includes] ========================================== */
 
 #include "MultiButton/multi_button.h"
-#include "xf_err.h"
 #include "xf_hal.h"
 
 #ifdef __cplusplus
@@ -28,9 +27,8 @@ extern "C" {
 
 /* ==================== [Global Prototypes] ================================= */
 
-xf_err_t xf_button_init(struct Button *handle, xf_gpio_num_t num,
-                         uint8_t press_level);
-xf_err_t xf_button_ticks(xf_timer_num_t tim_index);
+xf_err_t xf_button_init(struct Button *handle, xf_gpio_num_t num, uint8_t press_level);
+xf_err_t xf_button_ticks(void);
 
 /* ==================== [Macros] ============================================ */
 

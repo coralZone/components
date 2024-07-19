@@ -16,6 +16,8 @@
 
 /* ==================== [Defines] =========================================== */
 
+#define TAG "TinyFrame"
+
 /* ==================== [Typedefs] ========================================== */
 
 /* ==================== [Static Prototypes] ================================= */
@@ -28,7 +30,7 @@ static void dumpFrameInfo(TF_Msg *msg);
 
 static TinyFrame *demo_tf;
 
-static bool do_corrupt = false;   
+static bool do_corrupt = false;
 
 /* ==================== [Macros] ============================================ */
 
@@ -36,10 +38,12 @@ static bool do_corrupt = false;
 
 void xf_main(void)
 {
-     TF_Msg msg;
+    TF_Msg msg;
     const char *longstr = "Lorem ipsum dolor sit amet.";
 
-    xf_uart_init(1, 115200, XF_UART_PRESET_DEFAULT, 128, 128, 4, 5, NC, NC);
+    xf_hal_uart_init(1, 115200);
+    xf_hal_uart_set_gpio(1, 4, 5);
+    xf_hal_uart_enable(1);
     xf_TF_uart_port(1);
 
     //设置TinyFrame库
@@ -47,7 +51,7 @@ void xf_main(void)
     // 添加lintener
     TF_AddGenericListener(demo_tf, myListener);
 
-    printf("------ Simulate sending a message --------\n");
+    XF_LOGI(TAG, "------ Simulate sending a message --------");
 
     TF_ClearMsg(&msg);
     msg.type = 0x22;
@@ -68,11 +72,11 @@ void xf_main(void)
     msg.len = 0;
     msg.type = 0x77;
     TF_Query(demo_tf, &msg, testIdListener, NULL, 0);
-    
-    printf("This should fail:\n");
-    
+
+    XF_LOGI(TAG, "This should fail:");
+
     // 测试校验和
-    do_corrupt = true;    
+    do_corrupt = true;
     msg.type = 0x44;
     msg.data = (uint8_t *) "Hello2";
     msg.len = 7;
@@ -91,18 +95,17 @@ static TF_Result myListener(TinyFrame *tf, TF_Msg *msg)
 
 static TF_Result testIdListener(TinyFrame *tf, TF_Msg *msg)
 {
-    printf("OK - ID Listener triggered for msg!\n");
+    XF_LOGI(TAG, "OK - ID Listener triggered for msg!");
     dumpFrameInfo(msg);
     return TF_CLOSE;
 }
 
 static void dumpFrameInfo(TF_Msg *msg)
 {
-    printf("\033[33mFrame info\n"
-               "  type: %02Xh\n"
-               "  data: \"%.*s\"\n"
-               "   len: %u\n"
-               "    id: %Xh\033[0m\n\n",
-           msg->type, msg->len, msg->data, msg->len, msg->frame_id);
+    XF_LOGI(TAG, "Frame info");
+    XF_LOGI(TAG, "  type: %02X", msg->type);
+    XF_LOGI(TAG, "  data: \"%.*s\"", msg->len, msg->data);
+    XF_LOGI(TAG, "   len: %u", msg->len);
+    XF_LOGI(TAG, "    id: %X", msg->frame_id);
 }
 

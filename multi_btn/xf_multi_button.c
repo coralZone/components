@@ -12,6 +12,7 @@
 /* ==================== [Includes] ========================================== */
 
 #include "xf_multi_button.h"
+#include "xf_task.h"
 
 /* ==================== [Defines] =========================================== */
 
@@ -20,7 +21,7 @@
 /* ==================== [Static Prototypes] ================================= */
 
 static uint8_t pin_level(uint8_t btn_id);
-static void timeout_cb(xf_timer_t *timer);
+static void timeout_cb(xf_task_t task);
 
 /* ==================== [Static Variables] ================================== */
 
@@ -35,15 +36,15 @@ static void timeout_cb(xf_timer_t *timer);
 
 /* ==================== [Global Functions] ================================== */
 
-xf_err_t xf_button_init(struct Button *handle, xf_gpio_num_t num,
-                         uint8_t press_level)
+xf_err_t xf_button_init(struct Button *handle, xf_gpio_num_t num, uint8_t press_level)
 {
     if (press_level) {
-        MB_ERR_CHECK(xf_gpio_init(num, XF_GPIO_INPUT_PULLDOWN));
+        MB_ERR_CHECK(xf_hal_gpio_init(num, XF_HAL_GPIO_DIR_IN));
+        MB_ERR_CHECK(xf_hal_gpio_set_pull(num, XF_HAL_GPIO_PULL_DOWN));
     } else {
-        MB_ERR_CHECK(xf_gpio_init(num, XF_GPIO_INPUT_PULLUP));
+        MB_ERR_CHECK(xf_hal_gpio_init(num, XF_HAL_GPIO_DIR_IN));
+        MB_ERR_CHECK(xf_hal_gpio_set_pull(num, XF_HAL_GPIO_PULL_UP));
     }
-
 
     button_init(handle, pin_level, press_level, num);
 
@@ -51,10 +52,9 @@ xf_err_t xf_button_init(struct Button *handle, xf_gpio_num_t num,
 }
 
 
-xf_err_t xf_button_ticks(xf_timer_num_t tim_index)
+xf_err_t xf_button_ticks(void)
 {
-    xf_timer_t *tim = xf_timer_create_by_ms(tim_index, 5, timeout_cb, NULL);
-    MB_ERR_CHECK(xf_timer_start(tim, XF_TIM_ALWAYS));
+    xf_ntask_create_loop(timeout_cb, NULL, 5, 10);
     return XF_OK;
 }
 
@@ -62,10 +62,10 @@ xf_err_t xf_button_ticks(xf_timer_num_t tim_index)
 
 static uint8_t pin_level(uint8_t btn_id)
 {
-    return xf_gpio_read(btn_id);
+    return xf_hal_gpio_get_level(btn_id);
 }
 
-static void timeout_cb(xf_timer_t *timer)
+static void timeout_cb(xf_task_t task)
 {
     button_ticks();
 }

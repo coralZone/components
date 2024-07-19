@@ -17,6 +17,8 @@
 
 /* ==================== [Defines] =========================================== */
 
+#define TAG "cjson"
+
 /* ==================== [Typedefs] ========================================== */
 
 /* ==================== [Static Prototypes] ================================= */
@@ -35,7 +37,7 @@ void xf_main(void)
     // 解析 JSON 字符串
     cJSON *root = cJSON_Parse(json_string);
     if (root == NULL) {
-        xf_printf("Failed to parse JSON\n");
+        XF_LOGI(TAG, "Failed to parse JSON");
         return;
     }
 
@@ -45,18 +47,17 @@ void xf_main(void)
     // 使用 cJSONUtils_GetPointer 获取路径中的 JSON 项
     cJSON *target_item = cJSONUtils_GetPointer(root, pointer_path);
     if (target_item == NULL) {
-        xf_printf("Failed to find target item\n");
+        XF_LOGI(TAG, "Failed to find target item");
         cJSON_Delete(root);
         return;
     }
 
     // 打印目标项的值
-    char *target_value = target_item->string;
+    char *target_value = target_item->valuestring;
     if (target_value != NULL) {
-        xf_printf("Target value: %s\n", target_value);
-        free(target_value);
+        XF_LOGI(TAG, "Target value: %s", target_value);
     } else {
-        xf_printf("Failed to print target value\n");
+        XF_LOGI(TAG, "Failed to print target value");
     }
 
     // 清理

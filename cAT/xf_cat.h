@@ -13,7 +13,7 @@
 #define __XF_CAT_H__
 
 /* ==================== [Includes] ========================================== */
-#include "xf_err.h"
+
 #include "xf_hal.h"
 #include "cAT/src/cat.h"
 
@@ -28,7 +28,7 @@ extern "C" {
 /* ==================== [Global Prototypes] ================================= */
 
 xf_err_t xf_cat_init(xf_uart_num_t num, struct cat_descriptor *desc);
-xf_err_t xf_cat_service(xf_timer_num_t tim_index);
+xf_err_t xf_cat_service(void);
 
 /* ==================== [Macros] ============================================ */
 
