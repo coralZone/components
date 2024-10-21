@@ -1,0 +1,15 @@
+
+config COREMARK_ITERATIONS
+    int "Number of iterations of coremark."
+    default 3000
+    help
+        It needs to be configured according to different chips to ensure 
+        that coremark can run for more than 10s.
+
+config COREMARK_COMPILER_FLAGS_STR
+    string "Compile flags strings."
+    default "-O3"
+    help
+        It is only used to output the current compilation options 
+        and has no practical effect.
+
