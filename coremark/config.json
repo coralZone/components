@@ -9,11 +9,12 @@
         "testing"
     ],
     "description": "CoreMark's primary goals are simplicity and providing a method for testing only a processor's core features.",
-    "url": "https://github.com/coralZone/components",
+    "url": "https://github.com/eembc/coremark",
     "dependencies":
     {},
     "links":
     {
-        "Homepage": "https://github.com/coralZone/components"
+        "Homepage": "https://www.eembc.org",
+        "Issues": "https://github.com/eembc/coremark/issues"
     }
 }
