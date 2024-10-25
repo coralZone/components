@@ -56,3 +56,7 @@ dkms.conf
 build
 xfconfig
 xfconfig.old
+
+# vscode
+.vscode
+*.code-workspace
